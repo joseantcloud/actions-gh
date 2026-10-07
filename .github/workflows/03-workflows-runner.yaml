@@ -17,10 +17,5 @@ jobs:
               run: |
                 echo "This job runs under Windows runner"
                 echo "Runner OS: $RUNNER_OS -- $(uname -s) $(uname -r)"
-                echo "Disk space:"
-                df -h
-                echo "Memory usage:"
-                free -h
-                echo "CPU information:"
-                lscpu
+                echo "Driver OS: $DRIVER_OS"
 
