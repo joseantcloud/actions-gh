@@ -21,3 +21,5 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+        working-directory: actions-gh/04-using-actions
