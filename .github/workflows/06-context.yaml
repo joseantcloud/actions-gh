@@ -1,0 +1,21 @@
+name: 06- context
+
+on: push
+
+jobs:
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display information
+        run: |
+          echo "Displaying context information ${{github.event_name}}"
+          echo "Repository: ${{github.repository}}"
+          echo "Actor: ${{github.actor}}"
+          echo "Ref: ${{github.ref}}"
+          echo "SHA: ${{github.sha}}"
+          echo "Run: ${{github.run_id}}"
+
+      - name:  environment variables
+        run: echo "${{ vars.MY_VARIABLE }}"
+
+    
