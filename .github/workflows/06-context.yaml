@@ -16,6 +16,7 @@ jobs:
           echo "Run: ${{github.run_id}}"
 
       - name:  environment variables
-        run: echo "${{ vars.MY_VARIABLE }}"
+        run: |
+          echo "Environment variable value: ${{ vars.MY_VARIABLE }}"
 
     
