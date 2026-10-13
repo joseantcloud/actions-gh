@@ -9,11 +9,17 @@ on:
         description: 'Enable debug mode'
         type: boolean
         required: true
-        
+ 
+env:
+  MY_WORKFLOW_VAR: 'workflow'
+  MY_OVERRIDE_VAR: 'workflow'
 
 jobs:
   echo-data:
     runs-on: ubuntu-latest
+    env:
+      MY_WORKFLOW_VAR: 'job'
+      MY_OVERRIDE_VAR: 'job'
     steps:
       - name: Display information
         run: |
@@ -28,4 +34,8 @@ jobs:
         run: |
           echo "Environment variable value: ${{ vars.MY_VARIABLE }}"
 
+      - name:  Print environment variables
+        run: |
+          echo "MY_WORKFLOW_VAR: ${{ env.MY_WORKFLOW_VAR }}"
+          echo "MY_OVERRIDE_VAR: ${{ env.MY_OVERRIDE_VAR }}"
     
