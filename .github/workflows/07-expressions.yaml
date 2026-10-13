@@ -7,20 +7,35 @@ on:
             debug:
                 type: boolean
                 default: false
+                description: Enable debug output
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
     echo:
         runs-on: ubuntu-latest
+        timeout-minutes: 5
         steps:
             - name: '[debug] Print start-up'
               if: ${{ inputs.debug }}
+              env:
+                  EVENT_NAME: ${{ github.event_name }}
+                  REF: ${{ github.ref }}
+                  SHA: ${{ github.sha }}
               run: |
-                  echo "Starting workflow with debug mode enabled - Triggered by ${{ github.event_name }}"
-                  echo " Branch ${{ github.ref }}"
-                  echo "SHA ${{ github.sha }}"
+                  printf 'Starting workflow with debug mode enabled - Triggered by %s\n' "$EVENT_NAME"
+                  printf 'Branch %s\n' "$REF"
+                  printf 'SHA %s\n' "$SHA"
             
             - name: '[debug] Triggered from main'
               if: ${{ inputs.debug && github.ref == 'refs/heads/main' }}
-              run: echo "Triggered from main branch with debug mode enabled and from main ${{ github.ref }}"
+              env:
+                  REF: ${{ github.ref }}
+              run: printf 'Triggered from main branch with debug mode enabled: %s\n' "$REF"
 
 
