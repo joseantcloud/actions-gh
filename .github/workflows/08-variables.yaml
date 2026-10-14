@@ -32,3 +32,11 @@ jobs:
           OVERWRITE_VAR: "This is an overwritten step-level var"
         run: |
           echo "Overwritten env var: -> ${{ env.OVERWRITE_VAR }}"
+
+  echo-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Global Env Var
+        run: |
+          echo "Github var: -> ${{ vars.MY_VARIABLE }}"
+          echo "Another Github var: -> ${{ vars.OVERWRITTEN_VAR }}"
