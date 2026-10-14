@@ -40,3 +40,12 @@ jobs:
         run: |
           echo "Github var: -> ${{ vars.MY_VARIABLE }}"
           echo "Another Github var: -> ${{ vars.OVERWRITTEN_VAR }}"
+  
+  echo-environment:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Print Environment 
+        run: |
+          echo "Environment: -> ${{ vars.TARGET_VAR }}"
+          
