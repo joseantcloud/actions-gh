@@ -1,7 +1,19 @@
 name: '09-functions'
 
 on:
-    push:
-        pull_request:
-            workflow_dispatch:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    echo-1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Failing steps
+              run: exit 1
+            - name: It will be skipped
+              if: ${{ success() }}
+              run: echo "This step will be print if the previous step is OK"
+            - name: I will execute
+              if: ${{ failure() }}
+              run: echo "This step will be print if the previous step failed"
 
