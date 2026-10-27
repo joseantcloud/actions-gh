@@ -1,0 +1,31 @@
+name: 13 - Caching
+
+on:
+  workflow_dispatch:
+    inputs:
+      use-cache:
+        description: "Whether to use caching"
+        type: boolean
+        default: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: 13-caching/my-app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "24.x"
+      - name: Install dependencies
+        run: npm ci
+      - name: Testing
+        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Deploy to non-production environment
+        run: echo "Deploying to non-production environment"
