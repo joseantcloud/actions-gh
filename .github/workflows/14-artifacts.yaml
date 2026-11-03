@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 14-artifacts/my-app
+        working-directory: react-app
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -22,7 +22,7 @@ jobs:
         id: cache
         with:
           path: 14-artifacts/react-app/node_modules
-          key: deps-node-modules-${{ hashFiles('14-artifacts/my-app/package-lock.json')}}
+          key: deps-node-modules-${{ hashFiles('14-artifacts/react-app/package-lock.json')}}
       - name: install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app
-          path: react-app/build
+          path: 14-artifacts/react-app/build
 
     
   deploy:
