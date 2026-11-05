@@ -49,7 +49,7 @@ jobs:
                 include:
                     - color: red
                       shape: circle
-                      size: large
+                      
 
 
              
