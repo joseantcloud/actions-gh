@@ -1,4 +1,5 @@
 name: 16 Environments Workflow
+run-name: Run with target environment | running environment --> ${{ inputs.target-env }}
 
 on:
     workflow_dispatch:
