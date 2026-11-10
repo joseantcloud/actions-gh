@@ -1,0 +1,27 @@
+name: Custom Actions Composite Workflow - 17
+
+on:
+    workflow_dispatch:
+
+env:
+    working-directory: react-app
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: ${{ env.working-directory }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Setup Node.js and NPM Dependencies
+              uses: ./.github/actions/composite-cache-deps
+              with:
+                node-version: "22.x"
+                working-dir: ${{ env.working-directory }}
+            - name: Test
+              run: npm run test
+              
+            - name: Build
+              run: npm run build
+              
