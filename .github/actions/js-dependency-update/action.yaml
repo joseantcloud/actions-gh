@@ -1,0 +1,10 @@
+
+name: JS Dependency Update
+description: Updates JavaScript dependencies using a custom action
+
+runs:
+  using: "node24"
+  main: "index.js"
+
+
+
