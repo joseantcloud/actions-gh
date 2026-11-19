@@ -14,6 +14,9 @@ on:
       url:
         description: The URL of the deployed version
         value: ${{ jobs.deploy.outputs.url }}
+      target-directory:
+        description: The directory used by the build
+        value: ${{ jobs.deploy.outputs.target-directory }}
 
 jobs:
   deploy:
@@ -21,18 +24,21 @@ jobs:
     outputs:
       build-status: ${{ steps.build.outputs.build-status }}
       url: ${{ steps.deploy.outputs.url }}
+      target-directory: ${{ inputs.target-directory }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build
         id: build
+        env:
+          TARGET_DIRECTORY: ${{ inputs.target-directory }}
         run: |
-          echo "Building the project... ${{ inputs.target-directory }}"
-          echo "Build complete. " >> "$GITHUB_OUTPUT"
+          echo "Building the project... $TARGET_DIRECTORY"
+          echo "Build complete."
           echo "build-status=success" >> "$GITHUB_OUTPUT"
 
       - name: Deploy
         id: deploy
         run: |
           echo "Deploying the project..."
-          echo "url=https://google.com"
+          echo "url=https://google.com" >> "$GITHUB_OUTPUT"
